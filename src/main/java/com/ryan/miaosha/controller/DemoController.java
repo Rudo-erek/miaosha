@@ -1,7 +1,10 @@
 package com.ryan.miaosha.controller;
 
+import com.ryan.miaosha.domain.User;
 import com.ryan.miaosha.result.CodeMsg;
 import com.ryan.miaosha.result.Result;
+import com.ryan.miaosha.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @EnableAutoConfiguration
 public class DemoController {
+
+    @Autowired
+    UserService userService;
+
     @RequestMapping("/")
     @ResponseBody
     String home() {
@@ -36,5 +43,28 @@ public class DemoController {
     public String thymeleaf(Model model) {
         model.addAttribute("name", "Ryan");
         return "hello";
+    }
+
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public Result<User> getUser() {
+        User user = userService.getUser(1);
+        return Result.success(user);
+    }
+
+    @RequestMapping("/insert")
+    @ResponseBody
+    public boolean insertUser() {
+        User[] users = new User[2];
+        users[0] = new User();
+        users[0].setId(2);
+        users[0].setName("222");
+
+        users[1] = new User();
+        users[1].setName("333");
+        users[1].setId(1);
+
+        userService.insertTransaction(users);
+        return true;
     }
 }
