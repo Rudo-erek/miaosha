@@ -1,6 +1,8 @@
 package com.ryan.miaosha.controller;
 
 import com.ryan.miaosha.domain.User;
+import com.ryan.miaosha.redis.RedisService;
+import com.ryan.miaosha.redis.keys.UserKeyGenerator;
 import com.ryan.miaosha.result.CodeMsg;
 import com.ryan.miaosha.result.Result;
 import com.ryan.miaosha.service.UserService;
@@ -19,6 +21,9 @@ public class DemoController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RedisService redisService;
 
     @RequestMapping("/")
     @ResponseBody
@@ -67,4 +72,22 @@ public class DemoController {
         userService.insertTransaction(users);
         return true;
     }
+
+    @RequestMapping("/redis/set")
+    @ResponseBody
+    public Result<Boolean> redis() {
+        User user = new User();
+        user.setId(1);
+        user.setName("Ryan");
+        redisService.set(UserKeyGenerator.userKeyById, "1", user);
+        return Result.success(true);
+    }
+
+    @RequestMapping("/redis/get")
+    @ResponseBody
+    public Result<User> redisget() {
+        User user = redisService.get(UserKeyGenerator.userKeyById, "1", User.class);
+        return Result.success(user);
+    }
+
 }
