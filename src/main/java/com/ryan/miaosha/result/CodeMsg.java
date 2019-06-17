@@ -12,6 +12,7 @@ public class CodeMsg {
     public static final CodeMsg MOBILE_NOTEXIST = new CodeMsg(103, "手机号码未注册！");
     public static final CodeMsg PASSWORD_EMPTY = new CodeMsg(104, "密码不能为空！");
     public static final CodeMsg PASSWORD_ERROR = new CodeMsg(104, "密码错误！");
+    public static final CodeMsg BIND_ERROR = new CodeMsg(105, "参数校验异常：%s");
 
     private CodeMsg(int code, String msg) {
         this.code = code;
@@ -32,5 +33,9 @@ public class CodeMsg {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public CodeMsg fillAllArgs(Object... objects) {
+        return new CodeMsg(this.code, String.format(this.msg, objects));
     }
 }

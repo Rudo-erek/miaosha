@@ -1,7 +1,17 @@
 package com.ryan.miaosha.vo;
 
+import com.ryan.miaosha.validator.IsMobile;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+
 public class LoginVo {
+    @NotNull
+    @IsMobile
     private String mobile;
+
+    @NotNull
+    @Length(min = 6)
     private String password;
 
     public String getMobile() {
