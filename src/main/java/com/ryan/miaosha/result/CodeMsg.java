@@ -14,6 +14,10 @@ public class CodeMsg {
     public static final CodeMsg PASSWORD_ERROR = new CodeMsg(104, "密码错误！");
     public static final CodeMsg BIND_ERROR = new CodeMsg(105, "参数校验异常：%s");
 
+    // 秒杀错误
+    public static final CodeMsg MIAOSHA_ERROR = new CodeMsg(300, "请勿重复秒杀！");
+    public static final CodeMsg STOCK_ERROR = new CodeMsg(301, "商品库存不足！");
+
     private CodeMsg(int code, String msg) {
         this.code = code;
         this.msg = msg;

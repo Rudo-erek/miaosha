@@ -3,7 +3,7 @@ package com.ryan.miaosha.domain;
 import java.util.Date;
 
 public class MiaoshaUser {
-    private long mobile;
+    private long id;
     private String nickname;
     private String password;
     private String salt;
@@ -12,12 +12,12 @@ public class MiaoshaUser {
     private Date lastLoginTime;
     private int loginCount;
 
-    public long getMobile() {
-        return mobile;
+    public long getId() {
+        return id;
     }
 
-    public void setMobile(long mobile) {
-        this.mobile = mobile;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNickname() {
