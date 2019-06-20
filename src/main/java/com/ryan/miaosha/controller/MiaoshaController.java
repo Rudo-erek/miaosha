@@ -34,11 +34,11 @@ public class MiaoshaController {
         }
 
         // 判断是否已经抢到
-        OrderInfo orderInfo = orderService.getOrderByUserIdGoodsId(user.getId(), goodsId);
-        if (orderInfo != null) {
-            model.addAttribute("errMsg", CodeMsg.MIAOSHA_ERROR);
-            return "miaosha_fail";
-        }
+//        OrderInfo orderInfo = orderService.getOrderByUserIdGoodsId(user.getId(), goodsId);
+//        if (orderInfo != null) {
+//            model.addAttribute("errMsg", CodeMsg.MIAOSHA_ERROR);
+//            return "miaosha_fail";
+//        }
 
         // 检查库存余量
         GoodsVo goodsVo = goodsService.getGoodsByGoodsId(goodsId);
@@ -48,8 +48,10 @@ public class MiaoshaController {
         }
 
         // 下订单、减库存、写入订单
+        OrderInfo orderInfo = null;
         orderInfo = miaoshaService.miaosha(user, goodsVo);
-        model.addAttribute("orderId", orderInfo.getId());
-        return "success";
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("goods", goodsVo);
+        return "order_detail";
     }
 }

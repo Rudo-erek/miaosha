@@ -20,9 +20,9 @@ public class GoodsController {
 
     @RequestMapping("/to_list")
     public String toList(Model model, MiaoshaUser user) {
-        if (user == null)
-            return "login";
-        model.addAttribute("user", user);
+//        if (user == null)
+//            return "login";
+//        model.addAttribute("user", user);
 
         List<GoodsVo> listGoods = goodsService.listGoodsVo();
         model.addAttribute("listGoods", listGoods);
